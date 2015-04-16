@@ -20,9 +20,9 @@ if (! class_exists('GADWP_Backend_Item_Reports')) {
         public function __construct()
         {
             $this->gadwp = GADWP();
-            
+
             if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) && 1 == $this->gadwp->config->options['item_reports']) {
-                
+
                 // Add custom column in Posts List
                 add_filter('manage_posts_columns', array(
                     $this,
@@ -44,20 +44,22 @@ if (! class_exists('GADWP_Backend_Item_Reports')) {
                     'add_icons'
                 ), 10, 2);
             }
+            wp_enqueue_script('thickbox');
+            // wp_enqueue_style("wp-jquery-ui-dialog");
         }
 
         public function add_icons($column, $id)
         {
             global $wp_version;
-            
+
             if ($column != 'gadwp_stats') {
                 return;
             }
-            
+
             if (version_compare($wp_version, '3.8.0', '>=')) {
-                echo '<a id="gadwp-' . $id . '" title="' . get_the_title($id) . '" href="#' . $id . '" class="gadwp-icon dashicons-before dashicons-chart-area"></a>';
+                echo '<a id="gadwp-' . $id . '" title="' . get_the_title($id) . '" href="#TB_inline?height=550&inlineId=gadwp-window-'.$id.' " class="thickbox gadwp-icon dashicons-before dashicons-chart-area"></a>';
             } else {
-                echo '<a id="gadwp-' . $id . '" title="' . get_the_title($id) . '" href="#' . $id . '"><img class="gadwp-icon-oldwp" src="' . GADWP_URL . 'admin/images/gadash-icon.png"</a>';
+                echo '<a id="gadwp-' . $id . '" title="' . get_the_title($id) . '" href="#TB_inline?height=550&inlineId=gadwp-window-'.$id.' " class="thickbox" ><img class="gadwp-icon-oldwp" src="' . GADWP_URL . 'admin/images/gadash-icon.png"</a>';
             }
         }
 

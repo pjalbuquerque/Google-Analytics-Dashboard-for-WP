@@ -13,7 +13,7 @@ function() {
     var slug = "-" + item_id;
 
     if (!jQuery("#gadwp-window" + slug).length > 0) {
-      jQuery("body").append('<div id="gadwp-window' + slug + '"></div>');
+      jQuery("body").append('<div id="gadwp-window' + slug + '" class="hidden"></div>');
     }
     jQuery('#gadwp-window' + slug).gadwpItemReport(slug, item_id);
   });
